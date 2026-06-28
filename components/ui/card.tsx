@@ -13,10 +13,10 @@ export function Card({ children, className = '' }: CardProps) {
   );
 }
 
-export function CardTitle({ children }: { children: ReactNode }) {
-  return <h3 className="text-base font-semibold text-slate-900 dark:text-white">{children}</h3>;
+export function CardTitle({ children, className = '' }: CardProps) {
+  return <h3 className={`text-base font-semibold text-slate-900 dark:text-white ${className}`}>{children}</h3>;
 }
 
-export function CardDescription({ children }: { children: ReactNode }) {
-  return <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{children}</p>;
+export function CardDescription({ children, className = '' }: CardProps) {
+  return <p className={`text-sm text-slate-500 dark:text-slate-400 ${className}`}>{children}</p>;
 }

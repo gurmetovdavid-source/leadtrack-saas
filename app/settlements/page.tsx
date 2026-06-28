@@ -5,6 +5,7 @@ import { Card, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Select } from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
 import { AppState, Settlement, SettlementStatus } from '@/lib/types';
 import { addSettlement, getState, saveState } from '@/lib/storage';
 import { formatCurrency, statusColor } from '@/lib/utils';

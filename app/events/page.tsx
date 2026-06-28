@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Select } from '@/components/ui/select';
 import { AppState, LeadEvent } from '@/lib/types';
 import { getState } from '@/lib/storage';
-import { formatDateTime, statusColor } from '@/lib/utils';
+import { formatCurrency, formatDateTime, statusColor } from '@/lib/utils';
 import { CalendarClock, Filter } from 'lucide-react';
 
 const eventTypes = ['all', 'lead_submitted', 'booking_confirmed', 'payment', 'activation', 'visit_completed', 'cancellation', 'refund', 'clawback'];

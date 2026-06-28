@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { AppState, LeadEvent, Settlement } from '@/lib/types';
 import { getState, resetDemo } from '@/lib/storage';
-import { formatCurrency, formatDate, statusColor } from '@/lib/utils';
+import { formatCurrency, formatDate, formatDateTime, statusColor } from '@/lib/utils';
 import {
   BarChart,
   Bar,

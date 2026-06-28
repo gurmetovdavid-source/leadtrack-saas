@@ -1,23 +1,55 @@
-# Expense Tracker SaaS
+# LeadTrack — Multi-Partner SaaS Platform
 
-A simple expense tracking app for individuals and small teams. Track spending by category, set monthly budgets, and see where your money goes.
+A production-ready demo of a **multi-partner SaaS platform** with lead tracking, attribution, commission management, and settlement workflows. Built as a portfolio piece inspired by a real Upwork brief.
 
-## Features
+🌐 **Live demo:** [leadtrack-saas.vercel.app](https://leadtrack-saas.vercel.app)
 
-- 💵 **Add expenses** — amount, category, date, note
-- 📊 **Spending analytics** — by category and over time
-- 🎯 **Monthly budget** — set a limit and see remaining amount
-- 🏷️ **Categories** — food, transport, subscriptions, healthcare, etc.
-- 💾 **Local persistence** — data saved to browser localStorage (demo mode)
-- 📱 **Responsive UI** — works on desktop and mobile
+---
+
+## What the client asked for
+
+A web-based SaaS platform that connects multiple websites, partners, and sales channels into one central system:
+
+- **Offer catalog** — partners promote products and services.
+- **Lead management** — capture, qualify, and convert customer leads.
+- **Partner portal** — partners see assigned leads, performance, and commissions.
+- **Admin dashboard** — operators manage partners, offers, commissions, settlements, and reports.
+- **Event tracking** — timeline of lead submission, booking, payment, activation, cancellation, refund, and clawback events.
+- **Attribution** — track which website, partner, campaign, or channel generated the lead.
+- **Settlement ledger** — pending, confirmed, payable, paid, canceled, and clawback transactions.
+- **Embeddable widget** — script-based lead capture form for external websites.
+- **Role-based access control** — admin and partner views.
+
+---
+
+## What was built
+
+This demo delivers the full MVP scope requested in the first milestone:
+
+| Module | Features |
+|---|---|
+| **Dashboard** | KPI cards, revenue trend, leads by status, leads by source, recent events, pending settlements |
+| **Offers** | Offer catalog with pricing, commission rules, categories, status, add/edit workflow |
+| **Partners** | Partner directory, performance stats, commission rates, partner type badges |
+| **Leads** | Lead table with search, filters, status updates, source attribution, deal value |
+| **Events** | Event timeline with filters, actor tracking, automatic event generation |
+| **Settlements** | Settlement ledger, status workflow, mark-as-paid, payable totals |
+| **Partner Portal** | Self-service view for partners: leads, conversions, revenue, commissions, settlements |
+| **Widget Demo** | Embedded lead-capture form preview + installation code snippet |
+| **Settings** | Theme toggle, demo reset, data overview |
+
+---
 
 ## Tech stack
 
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS
-- Recharts
-- Lucide React
+- **Next.js 14** with App Router
+- **TypeScript**
+- **Tailwind CSS**
+- **Recharts** for analytics
+- **Lucide React** for icons
+- **localStorage** for demo persistence (no backend required for the demo)
+
+---
 
 ## Getting started
 
@@ -28,11 +60,26 @@ npm run dev
 
 Open http://localhost:3000
 
-## Live demo
+---
 
-🌐 **Open demo:** [expense-tracker-saas.vercel.app](https://expense-tracker-saas.vercel.app)
+## Demo accounts
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/gurmetovdavid-source/expense-tracker-saas)
+The demo runs in the browser. Use the **Admin / Partner view** toggle in the top bar to switch between:
+
+- **Admin view** — full access to dashboard, offers, partners, leads, events, settlements, widget demo.
+- **Partner view** — limited partner portal with assigned leads and settlement history.
+
+---
+
+## Design highlights
+
+- Clean, modern SaaS UI with a focused indigo brand color.
+- Responsive layout with collapsible sidebar.
+- Consistent color-coded status badges for leads, events, and settlements.
+- Accessible contrast and readable typography.
+- Subtle shadows and rounded surfaces without over-decoration.
+
+---
 
 ## License
 

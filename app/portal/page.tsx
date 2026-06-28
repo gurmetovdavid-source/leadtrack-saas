@@ -19,15 +19,10 @@ export default function PartnerPortalPage() {
     setState(getState());
   }, []);
 
-  if (!state) return null;
-
-  const partner = state.partners.find((p) => p.id === PORTAL_PARTNER_ID);
-  const myLeads = state.leads.filter((l) => l.partnerId === PORTAL_PARTNER_ID);
-  const converted = myLeads.filter((l) => l.status === 'converted');
-  const revenue = converted.reduce((sum, l) => sum + (l.value || 0), 0);
-  const commissionEstimate = revenue * ((partner?.commissionRate || 0) / 100);
-
+  // All hooks must run before any early return.
   const monthly = useMemo(() => {
+    if (!state) return [];
+    const myLeads = state.leads.filter((l) => l.partnerId === PORTAL_PARTNER_ID);
     const map = new Map<string, { leads: number; revenue: number }>();
     myLeads.forEach((l) => {
       const key = l.createdAt.slice(0, 7);
@@ -39,7 +34,15 @@ export default function PartnerPortalPage() {
     return Array.from(map.entries())
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([month, data]) => ({ month, ...data }));
-  }, [myLeads]);
+  }, [state]);
+
+  if (!state) return null;
+
+  const partner = state.partners.find((p) => p.id === PORTAL_PARTNER_ID);
+  const myLeads = state.leads.filter((l) => l.partnerId === PORTAL_PARTNER_ID);
+  const converted = myLeads.filter((l) => l.status === 'converted');
+  const revenue = converted.reduce((sum, l) => sum + (l.value || 0), 0);
+  const commissionEstimate = revenue * ((partner?.commissionRate || 0) / 100);
 
   return (
     <div className="page-container">

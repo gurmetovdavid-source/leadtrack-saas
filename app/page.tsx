@@ -42,26 +42,18 @@ export default function DashboardPage() {
     setState(getState());
   }, []);
 
-  if (!state) return null;
-
-  const totalLeads = state.leads.length;
-  const convertedLeads = state.leads.filter((l) => l.status === 'converted').length;
-  const conversionRate = totalLeads ? Math.round((convertedLeads / totalLeads) * 100) : 0;
-  const totalRevenue = state.leads.reduce((sum, l) => sum + (l.value || 0), 0);
-  const activePartners = state.partners.filter((p) => p.status === 'active').length;
-  const pendingSettlements = state.settlements
-    .filter((s) => s.status === 'payable' || s.status === 'pending')
-    .reduce((sum, s) => sum + s.amount, 0);
-
+  // All hooks must run before any early return to satisfy React's rules.
   const leadsByStatus = useMemo(() => {
+    if (!state) return [];
     const groups: Record<string, number> = {};
     state.leads.forEach((l) => {
       groups[l.status] = (groups[l.status] || 0) + 1;
     });
     return Object.entries(groups).map(([name, value]) => ({ name, value }));
-  }, [state.leads]);
+  }, [state]);
 
   const leadsBySource = useMemo(() => {
+    if (!state) return [];
     const groups: Record<string, number> = {};
     state.leads.forEach((l) => {
       groups[l.source] = (groups[l.source] || 0) + 1;
@@ -70,9 +62,10 @@ export default function DashboardPage() {
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value)
       .slice(0, 5);
-  }, [state.leads]);
+  }, [state]);
 
   const revenueTrend = useMemo(() => {
+    if (!state) return [];
     const map = new Map<string, number>();
     state.leads.forEach((l) => {
       if (l.status === 'converted' && l.value) {
@@ -83,12 +76,30 @@ export default function DashboardPage() {
     return Array.from(map.entries())
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([month, amount]) => ({ month, amount }));
-  }, [state.leads]);
+  }, [state]);
 
-  const recentEvents = [...state.events].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 5);
-  const recentSettlements = [...state.settlements]
-    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-    .slice(0, 4);
+  const recentEvents = useMemo(() => {
+    if (!state) return [];
+    return [...state.events].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 5);
+  }, [state]);
+
+  const recentSettlements = useMemo(() => {
+    if (!state) return [];
+    return [...state.settlements]
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+      .slice(0, 4);
+  }, [state]);
+
+  if (!state) return null;
+
+  const totalLeads = state.leads.length;
+  const convertedLeads = state.leads.filter((l) => l.status === 'converted').length;
+  const conversionRate = totalLeads ? Math.round((convertedLeads / totalLeads) * 100) : 0;
+  const totalRevenue = state.leads.reduce((sum, l) => sum + (l.value || 0), 0);
+  const activePartners = state.partners.filter((p) => p.status === 'active').length;
+  const pendingSettlements = state.settlements
+    .filter((s) => s.status === 'payable' || s.status === 'pending')
+    .reduce((sum, s) => sum + s.amount, 0);
 
   return (
     <div className="page-container">

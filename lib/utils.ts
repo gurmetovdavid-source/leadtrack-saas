@@ -1,4 +1,4 @@
-import { EventType, LeadStatus, Offer, SettlementStatus } from './types';
+import { EventType, LeadStatus, Offer, Partner, SettlementStatus } from './types';
 
 export function formatCurrency(value: number, currency = 'USD') {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency }).format(value);
@@ -14,7 +14,7 @@ export function formatDateTime(iso: string) {
   return d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
 }
 
-export function statusColor(status: LeadStatus | SettlementStatus | EventType | Offer['status']) {
+export function statusColor(status: LeadStatus | SettlementStatus | EventType | Offer['status'] | Partner['status']) {
   const map: Record<string, string> = {
     new: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300',
     contacted: 'bg-info/10 text-info',
@@ -28,6 +28,7 @@ export function statusColor(status: LeadStatus | SettlementStatus | EventType | 
     canceled: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300',
     clawback: 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300',
     active: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300',
+    inactive: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300',
     paused: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300',
     archived: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300',
     lead_submitted: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300',

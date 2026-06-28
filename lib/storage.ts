@@ -1,6 +1,6 @@
 'use client';
 
-import { AppState, Lead, LeadEvent, Offer, Partner, Settlement } from './types';
+import { AppState, Lead, LeadEvent, LeadStatus, Offer, Partner, Settlement } from './types';
 
 const STORAGE_KEY = 'leadtrack-data-v1';
 
